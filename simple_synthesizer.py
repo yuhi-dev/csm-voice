@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
 import numpy as np
 from scipy.io.wavfile import write
 import matplotlib.pyplot as plt
@@ -7,16 +10,14 @@ fs = 44100
 
 # 各母音の周波数
 vowel_frequencies = {
-    'formant0': 260,  
-    'formant1': 520,  
-    'formant2': 780,  
-    'formant3': 1040,  
-    'formant4': 0
+    'formant1': 938.7701768494737,
+    'formant2': 5123.0084833835,
+    'formant3': 8068.4413398406905,
+    'formant4': 9516.604712527871
 }
 
 # 各母音の長さ（秒）
 vowel_durations = {
-    'formant0': 3.0,
     'formant1': 3.0,
     'formant2': 3.0,
     'formant3': 3.0,
@@ -24,12 +25,11 @@ vowel_durations = {
 }
 
 # 各母音の振幅
-amplitudes = {
-    'formant0': 0.18,
-    'formant1': 0.14,
-    'formant2': 0.13,
-    'formant3': 0.03,
-    'formant4': 0.00
+vowel_amplitudes = {
+    'formant1': 0.1,
+    'formant2': 0.1,
+    'formant3': 0.1,
+    'formant4': 0.1
 }
 
 def generate_waveform(duration, frequency, amplitude=1.0, waveform_type='sine'):
@@ -75,7 +75,7 @@ def plot_vowel_sound(vowel_sound):
 
 if __name__ == '__main__':
     # フォルマントを合成してWaveファイルに保存する
-    vowel_sequence = ['formant0', 'formant1', 'formant2', 'formant3', 'formant4']
+    vowel_sequence = ['formant1', 'formant2', 'formant3', 'formant4']
 
     # 合成波形を入れるための空配列を作っておく
     combined_sound = np.array([])
@@ -84,7 +84,7 @@ if __name__ == '__main__':
     for vowel in vowel_sequence:
         frequency = vowel_frequencies[vowel]
         duration = vowel_durations[vowel]
-        amplitude = amplitudes[vowel]  # amplitudeを取得
+        amplitude = vowel_amplitudes[vowel]  # amplitudeを取得
         vowel_sound = generate_waveform(duration, frequency, amplitude=amplitude, waveform_type='square')
         # 重ね合わせる
         if combined_sound.size == 0:
@@ -97,4 +97,4 @@ if __name__ == '__main__':
     normalized_wave = np.int16(combined_sound / np.max(np.abs(combined_sound)) * 32767)
 
     # WAVファイルとして保存する
-    write('o_test_wave.wav', fs, normalized_wave)
+    write('test_wave.wav', fs, normalized_wave)
