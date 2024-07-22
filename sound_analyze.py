@@ -8,7 +8,7 @@ import pandas as pd
 sns.set()
 plt.rcParams['figure.dpi'] = 100 
 
-snd = parselmouth.Sound("四国めたん_う.wav")
+snd = parselmouth.Sound("waves/result/saibameru_vocalo.wav")
 
 plt.figure()
 plt.plot(snd.xs(), snd.values.T)
@@ -73,7 +73,7 @@ def draw_formants(formants):
     plt.show()
 
 # フォルマント分析
-formants_burg = snd.to_formant_burg(max_number_of_formants=5.0, maximum_formant=1700.0, window_length=0.025, pre_emphasis_from=50.0)
+formants_burg = snd.to_formant_burg(max_number_of_formants=5.0, maximum_formant=12000.0, window_length=0.025, pre_emphasis_from=50.0)
 
 # 各時刻における第1~第4フォルマントを取得する
 # pandasを使って成形する

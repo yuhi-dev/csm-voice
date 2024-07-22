@@ -97,4 +97,4 @@ if __name__ == '__main__':
     normalized_wave = np.int16(combined_sound / np.max(np.abs(combined_sound)) * 32767)
 
     # WAVファイルとして保存する
-    write('o_test_wave.wav', fs, normalized_wave)
+    write('waves/result/o_test_wave.wav', fs, normalized_wave)
